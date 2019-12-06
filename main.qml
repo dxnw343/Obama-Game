@@ -13,7 +13,7 @@ Window {
         id: image1
         anchors.fill: parent
         anchors.right: parent.right
-        source: "file:///N:/d.woodbridge/Desktop/ObamaGame/ObamGamer/grass.png"
+        source: "file:///C:/Users/dwood/Documents/ObamaGameGood/Obama-Game/Images/grass.png"
 
         Rectangle {
             id: avatar
@@ -42,7 +42,7 @@ Window {
             Image {
                 id: image
                 anchors.fill: parent
-                source: "file:///N:/d.woodbridge/Desktop/ObamaGame/ObamGamer/AVATAR.png"
+                source: "C:/Users/dwood/Documents/ObamaGameGood/Obama-Game/Images/avatar.png"
             }
         }
     }
