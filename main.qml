@@ -14,6 +14,11 @@ GameWindow {
     property real isminy
     property real ismaxy
 
+    property real heminx
+    property real hemaxx
+    property real heminy
+    property real hemaxy
+
 
 
     Rectangle {
@@ -68,6 +73,15 @@ GameWindow {
                             isminy = island.y.valueOf()
                             ismaxy = island.y.valueOf() + 530
 
+                            heminx = hedge.x.valueOf()
+                            hemaxx = hedge.x.valueOf() + 50
+                            heminy = hedge.y.valueOf()
+                            hemaxy = hedge.y.valueOf() + 50
+
+                            if(avmaxy >= heminy && avminx >= heminx){
+                                avatar.x -= 5
+                            }
+
                             if(isminx >= avminx){
                                 avatar.x += 5
                             }
@@ -80,6 +94,7 @@ GameWindow {
                             if(ismaxy <= avmaxy){
                                 avatar.y -= 5
                             }
+
 
                             if(event.key === Qt.Key_W){
                                 avatar.y -= 5
@@ -99,6 +114,22 @@ GameWindow {
                             id: avatarImage
                             anchors.fill: parent
                             source: "Images/avatar.png"
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+
+                    Rectangle {
+                        id: hedge
+                        x: 110
+                        y: 50
+                        width: 50
+                        height: 50
+                        color: "#ffffff"
+
+                        Image {
+                            id: hedgeimage
+                            anchors.fill: parent
+                            source: "Images/hedge.jpg"
                             fillMode: Image.PreserveAspectFit
                         }
                     }
