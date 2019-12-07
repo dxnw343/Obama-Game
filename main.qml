@@ -4,7 +4,10 @@ import VPlay 2.0
 
 Window {
     id: game
-
+    property real avminx
+    property real avmaxx
+    property real avminy
+    property real avmaxy
 
 
 
@@ -18,23 +21,27 @@ Window {
             id: avatar
             x: 33
             y: 60
-            width: 80
-            height: 80
+            width: 60
+            height: 60
             color: "#ffffff"
             focus: true
-            Keys.onPressed: {
 
+            Keys.onPressed: {
+                avminx = avatar.x.valueOf()
+                avmaxx = avatar.x.valueOf() + 60
+                avminy = avatar.y.valueOf()
+                avmaxy = avatar.y.valueOf() + 60
                 if(event.key === Qt.Key_W){
-                    avatar.y -= 7
+                    avatar.y -= 9
                 }
                 if(event.key === Qt.Key_A){
-                    avatar.x -= 7
+                    avatar.x -= 9
                 }
                 if(event.key === Qt.Key_S){
-                    avatar.y += 7
+                    avatar.y += 9
                 }
                 if(event.key === Qt.Key_D){
-                    avatar.x += 7
+                    avatar.x += 9
                 }
             }
 
@@ -48,8 +55,8 @@ Window {
 
         Rectangle {
             id: center
-            x: 278
-            y: 198
+            x: 598
+            y: 326
             width: 85
             height: 85
             color: "#ffffff"
@@ -64,3 +71,10 @@ Window {
 
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:960;width:1280}D{i:3;anchors_height:100;anchors_width:100}
+D{i:5;anchors_height:100;anchors_width:100}
+}
+##^##*/
