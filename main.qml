@@ -1,19 +1,18 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
+import VPlay 2.0
 
 Window {
     id: game
-    property alias image: image
-    property alias game: game
 
 
 
 
     Image {
-        id: image1
+        id: bg
         anchors.fill: parent
         anchors.right: parent.right
-        source: "file:///C:/Users/dwood/Documents/ObamaGameGood/Obama-Game/Images/grass.png"
+        source: "file:///C:/Users/dwood/Documents/ObamaGameGood/Obama-Game/Images/grass.jpg"
 
         Rectangle {
             id: avatar
@@ -40,10 +39,28 @@ Window {
             }
 
             Image {
-                id: image
+                id: avatarImage
                 anchors.fill: parent
-                source: "C:/Users/dwood/Documents/ObamaGameGood/Obama-Game/Images/avatar.png"
+                source: "Images/avatar.png"
+                fillMode: Image.PreserveAspectFit
             }
         }
+
+        Rectangle {
+            id: center
+            x: 278
+            y: 198
+            width: 85
+            height: 85
+            color: "#ffffff"
+
+            Image {
+                id: centerImage
+                anchors.fill: parent
+                source: "Images/center.png"
+                fillMode: Image.PreserveAspectFit
+            }
+        }
+
     }
 }
