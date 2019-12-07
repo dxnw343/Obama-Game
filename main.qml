@@ -2,79 +2,120 @@ import QtQuick 2.9
 import QtQuick.Window 2.2
 import VPlay 2.0
 
-Window {
+GameWindow {
     id: game
     property real avminx
     property real avmaxx
     property real avminy
     property real avmaxy
 
+    property real isminx
+    property real ismaxx
+    property real isminy
+    property real ismaxy
 
 
-    Image {
-        id: bg
+
+    Rectangle {
+        id: ocean
+        color: "#166cff"
         anchors.fill: parent
-        anchors.right: parent.right
-        source: "file:///C:/Users/dwood/Documents/ObamaGameGood/Obama-Game/Images/grass.jpg"
 
-        Rectangle {
-            id: avatar
-            x: 33
-            y: 60
-            width: 60
-            height: 60
-            color: "#ffffff"
-            focus: true
-
-            Keys.onPressed: {
-                avminx = avatar.x.valueOf()
-                avmaxx = avatar.x.valueOf() + 60
-                avminy = avatar.y.valueOf()
-                avmaxy = avatar.y.valueOf() + 60
-                if(event.key === Qt.Key_W){
-                    avatar.y -= 9
-                }
-                if(event.key === Qt.Key_A){
-                    avatar.x -= 9
-                }
-                if(event.key === Qt.Key_S){
-                    avatar.y += 9
-                }
-                if(event.key === Qt.Key_D){
-                    avatar.x += 9
-                }
-            }
-
-            Image {
-                id: avatarImage
-                anchors.fill: parent
-                source: "Images/avatar.png"
-                fillMode: Image.PreserveAspectFit
-            }
+        Image {
+            id: image
+            anchors.fill: parent
+            source: "Images/ocean.jpg"
+            fillMode: Image.Stretch
         }
 
-        Rectangle {
-            id: center
-            x: 598
-            y: 326
-            width: 85
-            height: 85
-            color: "#ffffff"
+        Scene {
+            id: scene
+            x: 250
+            y: 125
+            width: 500
+            height: 500
 
-            Image {
-                id: centerImage
+            Rectangle {
+                id: island
+                color: "#37e643"
                 anchors.fill: parent
-                source: "Images/center.png"
-                fillMode: Image.PreserveAspectFit
+
+                Image {
+                    id: bg
+                    x: 0
+                    y: 0
+                    anchors.fill: parent
+                    source: "file:///C:/Users/dwood/Documents/ObamaGameGood/Obama-Game/Images/grass.jpg"
+
+
+                    Rectangle {
+                        id: avatar
+                        x: 220
+                        y: 220
+                        width: 30
+                        height: 30
+                        color: "#f90202"
+                        focus: true
+
+                        Keys.onPressed: {
+                            avminx = avatar.x.valueOf()
+                            avmaxx = avatar.x.valueOf() + 60
+                            avminy = avatar.y.valueOf()
+                            avmaxy = avatar.y.valueOf() + 60
+
+                            isminx = island.x.valueOf()
+                            ismaxx = island.x.valueOf() + 530
+                            isminy = island.y.valueOf()
+                            ismaxy = island.y.valueOf() + 530
+
+                            if(isminx >= avminx){
+                                avatar.x += 5
+                            }
+                            if(ismaxx <= avmaxx){
+                                avatar.x -= 5
+                            }
+                            if(isminy >= avminy){
+                                avatar.y += 5
+                            }
+                            if(ismaxy <= avmaxy){
+                                avatar.y -= 5
+                            }
+
+                            if(event.key === Qt.Key_W){
+                                avatar.y -= 5
+                            }
+                            if(event.key === Qt.Key_A){
+                                avatar.x -= 5
+                            }
+                            if(event.key === Qt.Key_S){
+                                avatar.y += 5
+                            }
+                            if(event.key === Qt.Key_D){
+                                avatar.x += 5
+                            }
+                        }
+
+                        Image {
+                            id: avatarImage
+                            anchors.fill: parent
+                            source: "Images/avatar.png"
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                }
             }
         }
-
     }
+
+
 }
+
+
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:960;width:1280}D{i:3;anchors_height:100;anchors_width:100}
-D{i:5;anchors_height:100;anchors_width:100}
+    D{i:0;autoSize:true;height:750;width:750}D{i:2;anchors_height:100;anchors_width:100}
+D{i:7;anchors_height:100;anchors_width:100}D{i:4;anchors_height:200;anchors_width:200}
+D{i:3;anchors_height:500;anchors_width:500;anchors_x:250;anchors_y:125}D{i:1;anchors_height:200;anchors_width:200}
 }
 ##^##*/
