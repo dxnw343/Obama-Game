@@ -1,0 +1,167 @@
+import QtQuick 2.3
+import QtQuick.Window 2.2
+import QtQuick.Controls 1.2
+
+Window {
+    visible: true
+    width: 640
+    height: 640
+    title: "Minesweeper"
+
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        color: "#33b5e5"
+        radius: 20
+    }
+
+    Row {
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 8
+        anchors.margins: 8
+
+        Button {
+            text: "Easy"
+            onClicked: {
+                table.columns = 10
+                recalculateMine()
+                |
+            }
+        }
+
+        Button {
+            text: "Medium"
+            onClicked: {
+                table.columns = 18
+                recalculateMine()
+
+            }
+        }
+
+        Button {
+            text: "Hard"
+            onClicked: {
+                table.columns = 24
+                recalculateMine()
+
+            }
+        }
+    }
+
+    Grid {
+        id: table
+        columns: 18
+        rows: columns
+        anchors.centerIn: parent
+        property int numberOfMine
+        property var items
+
+        //on click needs to first check if Button(table.numberofmine) is in mines
+
+        Repeater {
+            id: rep1
+            model: table.rows * table.columns
+            Button {
+                width: 540 / table.columns
+                height: 540 / table.columns
+                onClicked: {
+                    console.log("This is model data", modelData)
+                    console.log(table.items.indexOf(modelData))
+                    if (text == "") {
+                        if (modelData in table.items) {
+                            text = "X" // Hit the mine
+                            animation.start()
+                            console.log("THAT WAS A MINE END!")
+                        }
+                        else {
+                                //   https://stackoverflow.com/questions/41991438/how-do-i-find-a-particular-listelement-inside-a-listmodel-in-qml
+                                console.log("Button No ",modelData," not a mine ", table.items)
+                                console.log("starting search")
+                                // if (modelData == table.numberOfMine) {
+                                //    text = "X" // Hit the mine
+                                //    animation.start()
+                                //} else
+                                if (modelData == (table.numberOfMine - table.columns) && (Math.floor(table.numberOfMine / table.columns) != 0)) {
+                                    text = "1" // Top of the mine
+                                }
+                                else if (modelData == (table.numberOfMine - table.columns + 1) && (table.numberOfMine % table.columns != (table.columns-1))) {
+                                    text = "1" // Top-Right diagonal
+                                }
+                                else if (modelData == (table.numberOfMine + 1) && (table.numberOfMine % table.columns != (table.columns-1))) {
+                                    text = "1" // Right of the mine
+                                }
+                                else if (modelData == (table.numberOfMine + table.columns + 1) && (table.numberOfMine % table.columns != (table.columns-1))) {
+                                    text = "1" // Bottom-Right diagonal
+                                }
+                                else if (modelData == (table.numberOfMine + table.columns) && (Math.ceil(table.numberOfMine / table.columns) != table.columns)) {
+                                    text = "1" // Bottom of the mine
+                                }
+                                else if (modelData == (table.numberOfMine + table.columns - 1) && (table.numberOfMine % table.columns != (table.columns-1))) {
+                                    text = "1" // Bottom-Left diagonal
+                                }
+                                else if (modelData == (table.numberOfMine - 1) && (table.numberOfMine % table.columns != 0)) {
+                                    text = "1" // Left of the mine
+                                }
+                                else if (modelData == (table.numberOfMine - table.columns - 1) && (table.numberOfMine % table.columns != (table.columns-1))) {
+                                    text = "1" // Top-Left diagonal
+                                }
+                                else {
+
+                                    text = " " // No mine near
+                                    opacity = 0.25
+                                }
+                            }
+
+
+
+                        }
+                    }
+                Rectangle {
+                    id: highlight
+                    anchors.fill: parent
+                    color: "red"
+                    opacity: 0
+                }
+
+                NumberAnimation {
+                    id: animation
+                    target: highlight
+                    property: "opacity"
+                    from: 0
+                    to: 0.8
+                    duration: 1000
+                    easing.type: Easing.OutBounce
+
+                }
+
+            }
+
+            }
+
+
+        }
+
+
+
+    function recalculateMine() {
+        // Calculating the location of the mine
+        var mines = []
+
+        for (var i=0; i<10; i++) {
+            table.numberOfMine = Math.round(Math.random() * Math.pow(table.columns, 2))
+            mines.push(table.numberOfMine)
+            console.log("Position of mine ", i, table.numberOfMine)
+
+
+        }
+        table.items = mines
+        console.log(table.items)
+        console.log(mines)
+
+    }
+
+    Component.onCompleted: {
+        recalculateMine()
+    }
+}
