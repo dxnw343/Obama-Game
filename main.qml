@@ -51,6 +51,7 @@ Window {
 =======
 import VPlay 2.0
 
+
 GameWindow {
     id: game
     property real avminx
@@ -99,7 +100,8 @@ GameWindow {
                     x: 0
                     y: 0
                     anchors.fill: parent
-                    source: "file:///C:/Users/dwood/Documents/ObamaGameGood/Obama-Game/Images/grass.jpg"
+                    source: "Images/grass.jpg"
+                    opacity: 20
 
 
                     Rectangle {
@@ -147,15 +149,19 @@ GameWindow {
 
                             if(event.key === Qt.Key_W){
                                 avatar.y -= 5
+                                console.log("Going up")
                             }
                             if(event.key === Qt.Key_A){
                                 avatar.x -= 5
+                                console.log("Going left")
                             }
                             if(event.key === Qt.Key_S){
                                 avatar.y += 5
+                                console.log("Going down")
                             }
                             if(event.key === Qt.Key_D){
                                 avatar.x += 5
+                                console.log("Going right")
                             }
                         }
 
@@ -167,19 +173,27 @@ GameWindow {
                         }
                     }
 
-                    Rectangle {
-                        id: hedge
-                        x: 110
-                        y: 50
-                        width: 50
-                        height: 50
-                        color: "#ffffff"
 
-                        Image {
-                            id: hedgeimage
-                            anchors.fill: parent
-                            source: "Images/hedge.jpg"
-                            fillMode: Image.PreserveAspectFit
+                    Repeater {
+                        id: hedge
+                        model: 6
+
+
+                        Rectangle {
+                            id: hedge1
+                            x: console.log(Math.random(250,750)% 10)  //needs to be a random x
+                            y: console.log(Math.random(125,625) % 10)  //needs to be a random y
+                            width: 50
+                            height: 50
+                            color: "#ffffff"
+
+                            Image {
+                                id: hedgeimage
+                                anchors.fill: parent
+                                source: "Images/hedge.jpg"
+                                fillMode: Image.PreserveAspectFit
+}
+
                         }
                     }
                 }
