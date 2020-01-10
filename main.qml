@@ -1,54 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
-<<<<<<< HEAD
-
-Window {
-    id: game
-    property alias image: image
-    property alias game: game
-
-
-
-
-    Image {
-        id: image1
-        anchors.fill: parent
-        anchors.right: parent.right
-        source: "file:///N:/d.woodbridge/Desktop/ObamaGame/ObamGamer/grass.png"
-
-        Rectangle {
-            id: avatar
-            x: 33
-            y: 60
-            width: 80
-            height: 80
-            color: "#ffffff"
-            focus: true
-            Keys.onPressed: {
-
-                if(event.key === Qt.Key_W){
-                    avatar.y -= 7
-                }
-                if(event.key === Qt.Key_A){
-                    avatar.x -= 7
-                }
-                if(event.key === Qt.Key_S){
-                    avatar.y += 7
-                }
-                if(event.key === Qt.Key_D){
-                    avatar.x += 7
-                }
-            }
-
-            Image {
-                id: image
-                anchors.fill: parent
-                source: "file:///N:/d.woodbridge/Desktop/ObamaGame/ObamGamer/AVATAR.png"
-            }
-        }
-    }
-}
-=======
+// import QtQuick.Controls 2.14
 import VPlay 2.0
 
 
@@ -68,6 +20,28 @@ GameWindow {
     property real hemaxx
     property real heminy
     property real hemaxy
+
+    property int randx
+    property int randy
+    property int repcount
+
+    function hedgerepeat(){
+        if(repcount<6){
+          randx = Math.random(50,135) * 500
+          randy = Math.random(25,125) * 500
+          repcount = repcount +1
+          console.log(randx);
+            console.log(randy);
+        }
+    }
+
+ //   Action {  }
+
+
+
+    Component.onCompleted: {
+        hedgerepeat();
+    }
 
 
 
@@ -129,9 +103,9 @@ GameWindow {
                             heminy = hedge.y.valueOf()
                             hemaxy = hedge.y.valueOf() + 50
 
-                            if(avmaxy >= heminy && avminx >= heminx){
-                                avatar.x -= 5
-                            }
+                            //if(avmaxy >= heminy && avminx >= hemaxx){
+                                //avatar.x -= 5
+                            //}
 
                             if(isminx >= avminx){
                                 avatar.x += 5
@@ -174,25 +148,30 @@ GameWindow {
                     }
 
 
-                    Repeater {
-                        id: hedge
-                        model: 6
+                    Grid{
+                        anchors.fill: parent
 
 
-                        Rectangle {
-                            id: hedge1
-                            x: console.log(Math.random(250,750)% 10)  //needs to be a random x
-                            y: console.log(Math.random(125,625) % 10)  //needs to be a random y
-                            width: 50
-                            height: 50
-                            color: "#ffffff"
+                        Repeater {
+                            id: hedge
+                            model: 6
 
-                            Image {
-                                id: hedgeimage
-                                anchors.fill: parent
-                                source: "Images/hedge.jpg"
-                                fillMode: Image.PreserveAspectFit
-}
+                            Rectangle {
+                                //id: hedge1
+                                x: randx  //needs to be a random x
+                                y: randy //needs to be a random y
+                                width: 50
+                                height: 50
+                                color: "#ffffff"
+                                Component.onCompleted:
+                                    hedgerepeat()
+
+                                Image {
+                                    id: hedgeimage
+                                    anchors.fill: parent
+                                    source: "Images/hedge.jpg"
+                                    fillMode: Image.PreserveAspectFit
+                            }
 
                         }
                     }
@@ -204,7 +183,7 @@ GameWindow {
 
 }
 
-
+}
 
 /*##^##
 Designer {
@@ -213,4 +192,3 @@ D{i:7;anchors_height:100;anchors_width:100}D{i:4;anchors_height:200;anchors_widt
 D{i:3;anchors_height:500;anchors_width:500;anchors_x:250;anchors_y:125}D{i:1;anchors_height:200;anchors_width:200}
 }
 ##^##*/
->>>>>>> Obama-Game
