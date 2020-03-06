@@ -1,8 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
-// import QtQuick.Controls 2.14
 import VPlay 2.0
-
 
 GameWindow {
     id: game
@@ -25,23 +23,7 @@ GameWindow {
     property int randy
     property int repcount
 
-    function hedgerepeat(){
-        if(repcount<6){
-          randx = Math.random(50,135) * 500
-          randy = Math.random(25,125) * 500
-          repcount = repcount +1
-          console.log(randx);
-            console.log(randy);
-        }
-    }
 
- //   Action {  }
-
-
-
-    Component.onCompleted: {
-        hedgerepeat();
-    }
 
 
 
@@ -104,7 +86,7 @@ GameWindow {
                             hemaxy = hedge.y.valueOf() + 50
 
                             //if(avmaxy >= heminy && avminx >= hemaxx){
-                                //avatar.x -= 5
+                            //avatar.x -= 5
                             //}
 
                             if(isminx >= avminx){
@@ -138,42 +120,116 @@ GameWindow {
                                 console.log("Going right")
                             }
                         }
-
                         Image {
                             id: avatarImage
                             anchors.fill: parent
                             source: "Images/avatar.png"
                             fillMode: Image.PreserveAspectFit
                         }
+
+
+
+
+                    Rectangle {
+                        id: hedge1
+                        x: Math.floor(Math.random() * (250 + 250) - 250)
+                        y: Math.floor(Math.random() * (250 + 250) - 250)
+                        width: 50
+                        height: 50
+                        color: "#ffffff"
+
+
+                        Image {
+                            id: hedge1image
+                            anchors.fill: parent
+                            source: "Images/hedge.jpg"
+                            fillMode: Image.PreserveAspectFit
+                        }
                     }
+                    Rectangle {
+                        id: hedge2
+                        x: Math.floor(Math.random() * (250 + 250) - 250)
+                        y: Math.floor(Math.random() * (250 + 250) - 250)
+                        width: 50
+                        height: 50
+                        color: "#ffffff"
 
 
-                    Grid{
-                        anchors.fill: parent
+                        Image {
+                            id: hedge2image
+                            anchors.fill: parent
+                            source: "Images/hedge.jpg"
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                    Rectangle {
+                        id: hedge3
+                        x: Math.floor(Math.random() * (250 + 250) - 250)
+                        y: Math.floor(Math.random() * (250 + 250) - 250)
+                        width: 50
+                        height: 50
+                        color: "#ffffff"
 
 
-                        Repeater {
-                            id: hedge
-                            model: 6
+                        Image {
+                            id: hedge3image
+                            anchors.fill: parent
+                            source: "Images/hedge.jpg"
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                    Rectangle {
+                        id: hedge4
+                        x: Math.floor(Math.random() * (250 + 250) - 250)
+                        y: Math.floor(Math.random() * (250 + 250) - 250)
+                        width: 50
+                        height: 50
+                        color: "#ffffff"
 
-                            Rectangle {
-                                //id: hedge1
-                                x: randx  //needs to be a random x
-                                y: randy //needs to be a random y
-                                width: 50
-                                height: 50
-                                color: "#ffffff"
-                                Component.onCompleted:
-                                    hedgerepeat()
 
-                                Image {
-                                    id: hedgeimage
-                                    anchors.fill: parent
-                                    source: "Images/hedge.jpg"
-                                    fillMode: Image.PreserveAspectFit
-                            }
+                        Image {
+                            id: hedge4image
+                            anchors.fill: parent
+                            source: "Images/hedge.jpg"
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                    Rectangle {
+                        id: hedge5
+                        x: Math.floor(Math.random() * (250 + 250) - 250)
+                        y: Math.floor(Math.random() * (250 + 250) - 250)
+                        width: 50
+                        height: 50
+                        color: "#ffffff"
+
+
+                        Image {
+                            id: hedge5image
+                            anchors.fill: parent
+                            source: "Images/hedge.jpg"
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                    Rectangle {
+
+                        id: hedge6
+                        x: Math.floor(Math.random() * (250 + 250) - 250)
+                        y: Math.floor(Math.random() * (250 + 250) - 250)
+                        width: 50
+                        height: 50
+                        color: "#ffffff"
+
+
+                        Image {
+                            id: hedge6image
+                            anchors.fill: parent
+                            source: "Images/hedge.jpg"
+                            fillMode: Image.PreserveAspectFit
+                        }
+
 
                         }
+                    }
                     }
                 }
             }
@@ -181,9 +237,9 @@ GameWindow {
     }
 
 
-}
 
-}
+
+
 
 /*##^##
 Designer {
